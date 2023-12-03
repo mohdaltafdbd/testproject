@@ -1,0 +1,39 @@
+version: "3"
+services:
+  mongo_db:
+    container_name: db_container
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - ./Ideal-Educators-Node/db:/data/db/
+
+  frontend:
+    build: ./Ideal-Educators-React
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Ideal-Educators-React/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: E:/hk2/Ideal-Educators-Node
+    ports:
+      - "8080:8080"
+    volumes:
+      # - backend_logs:/app/logs
+      - E:/hk2/Ideal-Educators-Node:/app
+    environment:
+      PORT: 8080
+      MONGO_DB_URL: mongodb://mongo_db/E-lerning # Corrected the variable name
+      DB_NAME: E-lerning
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}

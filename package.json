@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
+}
